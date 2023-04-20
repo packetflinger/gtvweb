@@ -23,9 +23,8 @@ func main() {
 
 func RunHTTPServer() {
 	address := fmt.Sprintf("%s:%d", *addr, *port)
-	router := LoadRoutes()
 	httpsrv := &http.Server{
-		Handler:      router,
+		Handler:      LoadRoutes(),
 		Addr:         address,
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
@@ -43,5 +42,5 @@ func LoadRoutes() *mux.Router {
 }
 
 func HandlerIndex(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Testing...")
+	fmt.Fprintln(w, "Testing...", time.Now().String())
 }
